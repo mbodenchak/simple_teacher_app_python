@@ -2,9 +2,12 @@ PROMPT USER
   IF "Add Grade"
     PROMPT FOR STUDENT ID
     IF STUDENT ID exists in students dictionary
-      PROMPT for ASSIGNMENT TITLE, DATE, and GRADE
-      GENERATE new unique ASSIGNMENT ID
-      ADD ASSIGNMENT (with ID, TITLE, DATE, GRADE) to the student's list of assignments
+      PROMPT for ASSIGNMENT TITLE, DATE, GRADE, and CATEGORY
+      IF CATEGORY exists in students dictionary
+        GENERATE new unique ASSIGNMENT ID
+        ADD ASSIGNMENT (with ID, TITLE, DATE, GRADE, CATEGORY) to the student's list of assignments
+      ELSE  
+        DISPLAY "Category not found. Please add the category in 'Edit Gradebook'"
     ELSE
       DISPLAY "Student not found"
   
@@ -12,7 +15,7 @@ PROMPT USER
     PROMPT FOR STUDENT ID
     IF STUDENT ID exists in students dictionary
       PROMPT for ASSIGNMENT ID
-      IF assignment ID found for that stufdent
+      IF assignment ID found for that student
         PROMPT FOR new GRADE
         UPDATE the assignment grade
       ELSE
@@ -56,5 +59,36 @@ PROMPT USER
     ELSE 
       DISPLAY "Student not found"
 
+
+  IF "Edit Gradebook"
+    PROMPT "Would you like to (A)dd, (E)dit, or (D)elete a category?"
+
+    If "Add"
+      PROMPT for CATEGORY Name
+      PROMPT for GRADE WEIGHT (e.g., .2 for 20% of total grade)
+      ADD CATEGORY to categories dictionary with structure:
+        categories[CATEGORY NAME] = GRADE WEIGHT
+      DISPLAY "Category added"
+
+  IF "Delete"
+    PROMPT for CATEGORY NAME
+    IF CATEGORY exists in categories dictionary
+      PROMPT "Are you sure you want to delete this category? (Y/N)"
+      IF confirmed
+        DELETE category from categories dictionary
+        DISPLAY "Category deleted"
+      ELSE 
+        CANCEL delition
+    ELSE 
+      DISPLAY "Category not found"
+
   IF "Exit"
     EXIT program
+
+
+
+# assignment structure:
+# {'id': 1, 'title': "Math Homework", 'date': "2023-09-01", 'grade': 95, 'category': "HOMEWORK"}
+
+# category structure:
+# categories = { "Homework": .2, "QUIZ": .3, "TEST": .5 }
