@@ -1,0 +1,41 @@
+PROMPT USER
+  IF "Add Grade"
+    PROMPT FOR STUDENT ID
+    IF STUDENT ID exists in students dictionary
+      PROMPT FOR ASSIGNMENT TITLE< DATe, AND GRADe>
+      ADD ASSIGNMENT (with TITLE, DATE, GRADE) to the student's list of assignments
+    ELSE
+      DISPLAY "Student not found"
+  
+  If "Edit Grade"
+    PROMPT FOR STUDENT ID
+    IF STUDENT ID exists in students dictionary
+      PROMPT for ASSIGNMENT TITLE or ID
+      IF assignment found for that stufdent
+        PROMPT FOR new GRADE
+        UPDATE the assignment grade
+      ELSE
+        DISPLAY "Assignment not found"
+    ELSE
+      DISPLAY "Student not found"
+
+  IF "Delete Grade"
+    PROMPT FOR STUDENT ID
+    IF STUDENT ID exists in students dictionary
+      PROMPT for ASSIGNMENT TITLE or ID
+      IF assignment found for student
+        DELETE the assignment from student's list of assignments
+      ELSE
+        DISPLAY "Assignment not Found"
+    ELSE
+      DISPLAY "Student not found"
+
+  IF "Add Student"
+    PROMPT for First Name, Last Name
+    GENERATE new unique STUDENT ID
+    ADD new student to students dictionary with the structure:
+      students[STUDENT ID] = {
+        'first_name': First Name,
+        'last_name': Last Name,
+        'assignments': []
+      }
