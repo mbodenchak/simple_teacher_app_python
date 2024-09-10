@@ -91,6 +91,29 @@ PROMPT USER
       ELSE 
         DISPLAY "Category not found"
 
+  IF "Calculate Overall Grade"
+    PROMPT FOR STUDENT ID
+    IF STUDENT ID exists in students dictionary
+      INITIATE total_grade = 0
+      INITIATE total_weight = 0
+      FOR each category in categories dictionary
+        IF student has assignments in that category
+          CALCULATE average grade for all assignments in that category
+          APPLY weight for the category (average grade * category weight)
+          ADD weighted grade to total_grade
+          ADD categoryu weight to total_weight
+        ELSE
+          DISPLAY "No assignments found for category {CATEGORY}"
+      
+      IF total_weight > 0
+        CALCULATE final overall grade = (total_grade / total_weight)
+        ROUND final overall grade to 2 decimal places
+        DISPLAY "Overall grade for student {STUDENT ID}: {final overall grade}"
+      ELSE 
+        DISPLAY "no assignments found for any category"
+    ELSE
+      DISPLAY "Student not found"
+
   IF "Exit"
     EXIT program
 
