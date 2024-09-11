@@ -1,15 +1,15 @@
-# Dictionaries for students and categories
+# define dictionaries for students and categories
 students = {}
 categories = {}
 
-
+# function to generate unique ID
 def generateUniqueID(id_list):
   if id_list:
     return max(id['id'] for id in id_list) + 1
   else:
     return 1
 
-# add student fn
+# add student function
 def addStudent():
   firstName = input("Enter student's first name: ")
   lastName = input("Enter student's last name: ")
@@ -21,6 +21,7 @@ def addStudent():
   }
   print(f"Student {firstName} {lastName} added with ID {studentID}.")
 
+# list all students function
 def listStudents():
   if not students:
     print("No students found.")
@@ -29,6 +30,8 @@ def listStudents():
     for studentID, studentData in students.items():
       print(f"ID: {studentID}, Name: {studentData['firstName']} {studentData['lastName']}")
 
+
+# view all assignments for a given student
 def viewStudentAssignments():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -41,6 +44,7 @@ def viewStudentAssignments():
   else:
     print("Students not found.")
 
+# add a grade into gradebook for a student
 def addGrade():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -64,7 +68,7 @@ def addGrade():
   else:
     print("Student not found.")
   
-  
+# edit a grade in the gradebook for a given student  
 def editGrade():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -80,6 +84,7 @@ def editGrade():
   else:
     print("Student not found.")
   
+# delete a grade in the gradebook for a given student    
 def deleteGrade():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -98,6 +103,7 @@ def deleteGrade():
   else:
     print("Student not found.")
 
+# delete a student and assignments from gradebook
 def deleteStudent():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -109,7 +115,8 @@ def deleteStudent():
       print("Deletion canceled.")
   else:
     print("Student not found.")
-  
+
+# edit the gradebook assignment weight categories  
 def editGradebook():
   action = input("Would you like to (A)dd, (E)dit, (D)elete, or (L)ist a category? ").upper()
   if action == 'A':
@@ -154,6 +161,7 @@ def editGradebook():
     else:
       print("No categories found")
 
+# calculate a given student's overall grade  
 def calcOverallGrade():
   studentID = int(input("Enter student ID: "))
   if studentID in students:
@@ -176,7 +184,8 @@ def calcOverallGrade():
       print("No assignments found  for any category.")
   else:
     print("Student not found.")
-  
+
+# display program menu  
 def mainMenu():
     while True:
       print("\nMain Menu:")
