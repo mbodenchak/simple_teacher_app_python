@@ -6,11 +6,25 @@ PROMPT USER
       IF CATEGORY exists in students dictionary
         GENERATE new unique ASSIGNMENT ID
         ADD ASSIGNMENT (with ID, TITLE, DATE, GRADE, CATEGORY) to the student's list of assignments
+        DISPLAY confirmation
       ELSE  
         DISPLAY "Category not found. Please add the category in 'Edit Gradebook'"
     ELSE
       DISPLAY "Student not found"
-  
+  IF "List All Students" 
+    IF students dictionary is not empty
+      DISPLAY each student's ID, firstname, and last Name
+    ELSE  
+      DISPLAY "No students found"
+
+  IF "View Student's Assignments"
+    PROMPT for STUDENT ID
+    IF STUDENT ID exists in students dictionary 
+      DISPLAY all assignments for student, assignment ID, title, date, grade, and category
+    ELSE
+      DISPLAY "student not found"
+
+
   If "Edit Grade"
     PROMPT FOR STUDENT ID
     IF STUDENT ID exists in students dictionary
@@ -18,6 +32,7 @@ PROMPT USER
       IF assignment ID found for that student
         PROMPT FOR new GRADE
         UPDATE the assignment grade
+        DISPLAY confirmation
       ELSE
         DISPLAY "Assignment not found"
     ELSE
@@ -31,6 +46,7 @@ PROMPT USER
         PROMPT "Are you sure you want to delete this assignment? (Y/N)"
         IF confirmed
           DELETE the assignment from student's list of assignments
+          DISPLAY confirmation
         ELSE 
           CANCEL deletion
       ELSE
@@ -54,6 +70,7 @@ PROMPT USER
       PROMPT "Are you sure you want to delete this student and all their grades? (Y/N)"
       IF confirmed  
         DELETE student from students dictionary
+        DISPLAY confirmation
       ELSE  
         CANCEL deletion
     ELSE 
@@ -102,8 +119,6 @@ PROMPT USER
           APPLY weight for the category (average grade * category weight)
           ADD weighted grade to total_grade
           ADD categoryu weight to total_weight
-        ELSE
-          DISPLAY "No assignments found for category {CATEGORY}"
       
       IF total_weight > 0
         CALCULATE final overall grade = (total_grade / total_weight)
