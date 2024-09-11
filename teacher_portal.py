@@ -123,8 +123,13 @@ def editGradebook():
     categoryName = input("enter category name to edit: ").upper()
     if categoryName in categories:
       newWeight = float(input(f"Enter new weight for {categoryName}: "))
-      categories[categoryName] = newWeight
-      print(f"Category {categoryName} updated with new weight {newWeight}")
+      
+      totalWeight = sum(categories.values()) - categories[categoryName] + newWeight
+      if totalWeight > 1.0:
+        print("Total weight cannot exceed 100%.")
+      else:
+        categories[categoryName] = newWeight
+        print(f"Category {categoryName} updated with new weight {newWeight}")
     else:
       print("Category not found.")
   elif action == 'D':
