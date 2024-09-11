@@ -78,20 +78,32 @@ def editGrade():
     print("Student not found.")
   
 def deleteGrade():
-  student_id = int(input("Enter student ID: "))
-  if student_id in students:
-    assignment_id = int(input("Enter assignment ID: "))
-    assignments = students[student_id]['assignments']
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    assignmentID = int(input("Enter assignment ID: "))
+    assignments = students[studentID]['assignments']
     for assignment in assignments:
-      if assignment['id'] == assignment_id:
-        confirmation = input(f"Are you sure you want to delete assignment {assignment_id}? (Y/N): ").upper()
+      if assignment['id'] == assignmentID:
+        confirmation = input(f"Are you sure you want to delete assignment {assignmentID}? (Y/N): ").upper()
         if confirmation == 'Y':
-          students[student_id]['assignments'].remove(assignment)
-          print(f"Assignment {assignment_id} deleted.")
+          students[studentID]['assignments'].remove(assignment)
+          print(f"Assignment {assignmentID} deleted.")
         else:
           print("Deletion canceled.")
         return
     print("Assignment not found.")
+  else:
+    print("Student not found.")
+
+def deleteStudent():
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    confirmation = input(f"Are you sure you want to delete student {studentID} and all their assignments? (Y/N): ").upper()
+    if confirmation == 'Y':
+      del students[studentID]
+      print(f"Student {studentID} deleted.")
+    else:
+      print("Deletion canceled.")
   else:
     print("Student not found.")
   
@@ -123,7 +135,7 @@ def mainMenu():
       elif choice == '6':
         deleteGrade()
       elif choice == '7':
-        print("Delete Student")
+        deleteStudent()
       elif choice == '8':
         print("Edit Gradebook Weights")
       elif choice == '9':
