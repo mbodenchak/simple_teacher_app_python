@@ -11,6 +11,7 @@ PROMPT USER
         DISPLAY "Category not found. Please add the category in 'Edit Gradebook'"
     ELSE
       DISPLAY "Student not found"
+
   IF "List All Students" 
     IF students dictionary is not empty
       DISPLAY each student's ID, firstname, and last Name
