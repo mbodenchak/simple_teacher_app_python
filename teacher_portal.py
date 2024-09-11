@@ -62,6 +62,23 @@ def addGrade():
     print("Student not found.")
   
   
+def editGrade():
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    assignmentID = int(input("Enter assignment ID: "))
+    assignments = students[studentID]['assignments']
+    for assignment in assignments:
+      if assignment['id'] == assignmentID:
+        newGrade = float(input("Enter new grade: "))
+        assignment['grade'] = newGrade
+        print(f"Assignment {assignmentID} grade updated.")
+        return
+    print("Assignment not found.")
+  else:
+    print("Student not found.")
+  
+  
+  
 def mainMenu():
     while True:
       print("\nMain Menu:")
@@ -86,7 +103,7 @@ def mainMenu():
       elif choice == '4':
         addGrade()
       elif choice == '5':
-        print("Edit Grade")
+        editGrade()
       elif choice == '6':
         print("Delete Grade")
       elif choice == '7':
