@@ -112,8 +112,13 @@ def editGradebook():
   if action == 'A':
     categoryName = input("enter category name: ").upper()
     weight = float(input(f"Enter grade weight for {categoryName} (as decimal, e.g., 0.2): "))
-    categories[categoryName] = weight
-    print(f"Category {categoryName} added with weight {weight}.")
+
+    totalWeight = sum(categories.values()) + weight
+    if totalWeight > 1.0:
+      print("Total weight cannot exceed 100%.")
+    else: 
+      categories[categoryName] = weight
+      print(f"Category {categoryName} added with weight {weight}.")
   elif action == 'E':
     categoryName = input("enter category name to edit: ").upper()
     if categoryName in categories:
