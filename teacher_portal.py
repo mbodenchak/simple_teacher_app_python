@@ -17,7 +17,7 @@ def addStudent():
   students[studentID] = {
     'firstName': firstName,
     'lastName': lastName,
-    'assignements': []
+    'assignments': []
   }
   print(f"Student {firstName} {lastName} added with ID {studentID}.")
 
@@ -29,6 +29,17 @@ def listStudents():
     for studentID, studentData in students.items():
       print(f"ID: {studentID}, Name: {studentData['firstName']} {studentData['lastName']}")
 
+def viewStudentAssignments():
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    print(f"\nAssignments for student {students[studentID]['firstName']} {students[studentID]['lastName']}:")
+    if not students[studentID]['assignments']:
+      print("No assignments found.")
+    else:
+      for assignment in students[studentID]['assignments']:
+        print(f"ID: {assignment['id']}, Title: {assignment['title']}, Date: {assignment['date']}, Grade: {assignment['grade']}, Category: {assignment['category']}")
+  else:
+    print("Students not found.")
   
 def mainMenu():
     while True:
@@ -50,7 +61,7 @@ def mainMenu():
       elif choice == '2':
         listStudents()
       elif choice == '3':
-        print("View Assignments")
+        viewStudentAssignments()
       elif choice == '4':
         print("Add Grade")
       elif choice == '5':
