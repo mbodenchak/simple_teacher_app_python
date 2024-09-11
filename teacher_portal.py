@@ -108,7 +108,7 @@ def deleteStudent():
     print("Student not found.")
   
 def editGradebook():
-  action = input("Would you like to (A)dd, (E)dit, or (D)elete a category? ").upper()
+  action = input("Would you like to (A)dd, (E)dit, (D)elete, or (L)ist a category? ").upper()
   if action == 'A':
     categoryName = input("enter category name: ").upper()
     weight = float(input(f"Enter grade weight for {categoryName} (as decimal, e.g., 0.2): "))
@@ -133,7 +133,13 @@ def editGradebook():
         print("Delition canceled.")
     else:
       print("Category not found.")
-  
+  elif action == 'L':
+    if categories:
+      print("\nCurrent categories and weights:")
+      for name, weight in categories.items():
+        print(f"{name}: {weight * 100:.2f}%")
+    else:
+      print("No categories found")
   
 def mainMenu():
     while True:
