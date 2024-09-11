@@ -3,9 +3,9 @@ students = {}
 categories = {}
 
 
-def generateUniqueID(item_dict):
-  if item_dict:
-    return max(item_dict.keys()) + 1
+def generateUniqueID(id_list):
+  if id_list:
+    return max(id['id'] for id in id_list) + 1
   else:
     return 1
 
@@ -150,6 +150,29 @@ def editGradebook():
         print(f"{name}: {weight * 100:.2f}%")
     else:
       print("No categories found")
+
+def calcOverallGrade():
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    totalGrade = 0
+    totalWeight = 0
+    studentAssignments = students[studentID]['assignments']
+    
+    for category, weight in categories.items():
+      categoryGrades = [i['grade'] for i in studentAssignments if i['category'] == category]
+      if categoryGrades:
+        categoryAvg = sum(categoryGrades) / len(categoryGrades)
+        weightedGrade = categoryAvg * weight
+        totalGrade += weightedGrade
+        totalWeight += weight
+    
+    if totalWeight > 0:
+      overallGrade = round(totalGrade / totalWeight, 2)
+      print(f"Overall grade for student {studentID}: {overallGrade}")
+    else:
+      print("No assignments found  for any category.")
+  else:
+    print("Student not found.")
   
 def mainMenu():
     while True:
@@ -183,7 +206,7 @@ def mainMenu():
       elif choice == '8':
         editGradebook()
       elif choice == '9':
-        print("Calculate Overall Grade")
+        calcOverallGrade()
       elif choice == '10':
         print("Exiting program...")
         break
