@@ -49,15 +49,18 @@ def addGrade():
     grade = float(input("Enter grade: "))
     category = input("Enter assignment category: ").upper()
     
-    assignmentID = generateUniqueID(students[studentID]['assignments'])
-    students[studentID]['assignments'].append({
-      'id': assignmentID,
-      'title': title,
-      'date': date,
-      'grade': grade,
-      'category': category
-    })
-    print(f"Assignment {title} added for student {studentID}.")
+    if category in categories:
+      assignmentID = generateUniqueID(students[studentID]['assignments'])
+      students[studentID]['assignments'].append({
+        'id': assignmentID,
+        'title': title,
+        'date': date,
+        'grade': grade,
+        'category': category
+      })
+      print(f"Assignment {title} added for student {studentID}.")
+    else:
+      print(f"Category '{category}' not found. Please add the category in 'Edit Gradebook'.")
   else:
     print("Student not found.")
   
