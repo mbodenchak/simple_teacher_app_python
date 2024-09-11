@@ -40,6 +40,27 @@ def viewStudentAssignments():
         print(f"ID: {assignment['id']}, Title: {assignment['title']}, Date: {assignment['date']}, Grade: {assignment['grade']}, Category: {assignment['category']}")
   else:
     print("Students not found.")
+
+def addGrade():
+  studentID = int(input("Enter student ID: "))
+  if studentID in students:
+    title = input("Enter assignment title: ")
+    date = input("Enter assignment date (MM-DD-YYYY): ")
+    grade = float(input("Enter grade: "))
+    category = input("Enter assignment category: ").upper()
+    
+    assignmentID = generateUniqueID(students[studentID]['assignments'])
+    students[studentID]['assignments'].append({
+      'id': assignmentID,
+      'title': title,
+      'date': date,
+      'grade': grade,
+      'category': category
+    })
+    print(f"Assignment {title} added for student {studentID}.")
+  else:
+    print("Student not found.")
+  
   
 def mainMenu():
     while True:
@@ -63,7 +84,7 @@ def mainMenu():
       elif choice == '3':
         viewStudentAssignments()
       elif choice == '4':
-        print("Add Grade")
+        addGrade()
       elif choice == '5':
         print("Edit Grade")
       elif choice == '6':
