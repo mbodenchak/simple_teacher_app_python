@@ -64,7 +64,8 @@ PROMPT USER
         'last_name': Last Name,
         'assignments': [] 
       }
-  
+    DISPLAY Student {firstName} {lastName} added with ID {studentID}
+    
   IF "Delete Student"
     PROMPT FOR STUDENT ID
     IF STUDENT ID exists in students dictionary
@@ -84,10 +85,13 @@ PROMPT USER
     If "Add"
       PROMPT for CATEGORY Name
       PROMPT for GRADE WEIGHT (e.g., .2 for 20% of total grade)
-      ADD CATEGORY to categories dictionary with structure:
-        categories[CATEGORY NAME] = GRADE WEIGHT
-      DISPLAY "Category added"
-
+      IF cummulative weights of categories do not exceed 100%
+        ADD CATEGORY to categories dictionary with structure: 
+          categories[CATEGORY NAME] = GRADE WEIGHT
+        DISPLAY "Category added"
+      ELSE
+        DISPLAY "Total weight cannot exceed 100%
+        
     IF "Edit"
       PROMPT for CATEGORY NAME
       IF CATEGORY exists in categories dictionary
